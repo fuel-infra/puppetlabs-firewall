@@ -440,6 +440,10 @@ Puppet::Type.type(:firewall).provide :iptables, :parent => Puppet::Provider::Fir
     resource_map = self.class.instance_variable_get('@resource_map')
     known_booleans = self.class.instance_variable_get('@known_booleans')
 
+    # Always attempt to wait for a lock for iptables to prevent failures when
+    # puppet is running at the same time something else is managing the rules
+    args << ['--wait']
+
     resource_list.each do |res|
       resource_value = nil
       if (resource[res]) then

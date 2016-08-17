@@ -36,7 +36,7 @@ HASH_TO_ARGS6 = {
       :source => '::/0',
       :destination => '::/0',
     },
-    :args => ['-t', :filter, '-p', :tcp, '-m', 'comment', '--comment', '100 zero prefix length ipv6'],
+    :args => ["--wait", '-t', :filter, '-p', :tcp, '-m', 'comment', '--comment', '100 zero prefix length ipv6'],
   },
   'source_destination_ipv4_no_cidr' => {
     :params => {
@@ -46,7 +46,7 @@ HASH_TO_ARGS6 = {
       :source => '1.1.1.1',
       :destination => '2.2.2.2',
     },
-    :args => ['-t', :filter, '-s', '1.1.1.1/32', '-d', '2.2.2.2/32', '-p', :tcp, '-m', 'comment', '--comment', '000 source destination ipv4 no cidr'],
+    :args => ["--wait", '-t', :filter, '-s', '1.1.1.1/32', '-d', '2.2.2.2/32', '-p', :tcp, '-m', 'comment', '--comment', '000 source destination ipv4 no cidr'],
   },
  'source_destination_ipv6_no_cidr' => {
     :params => {
@@ -56,7 +56,7 @@ HASH_TO_ARGS6 = {
       :source => '2001:db8:1234::',
       :destination => '2001:db8:4321::',
     },
-    :args => ['-t', :filter, '-s', '2001:db8:1234::/128', '-d', '2001:db8:4321::/128', '-p', :tcp, '-m', 'comment', '--comment', '000 source destination ipv6 no cidr'],
+    :args => ["--wait", '-t', :filter, '-s', '2001:db8:1234::/128', '-d', '2001:db8:4321::/128', '-p', :tcp, '-m', 'comment', '--comment', '000 source destination ipv6 no cidr'],
   },
  'source_destination_ipv6_netmask' => {
     :params => {
@@ -66,7 +66,7 @@ HASH_TO_ARGS6 = {
       :source => '2001:db8:1234::/ffff:ffff:ffff:0000:0000:0000:0000:0000',
       :destination => '2001:db8:4321::/ffff:ffff:ffff:0000:0000:0000:0000:0000',
     },
-    :args => ['-t', :filter, '-s', '2001:db8:1234::/48', '-d', '2001:db8:4321::/48', '-p', :tcp, '-m', 'comment', '--comment', '000 source destination ipv6 netmask'],
+    :args => ["--wait", '-t', :filter, '-s', '2001:db8:1234::/48', '-d', '2001:db8:4321::/48', '-p', :tcp, '-m', 'comment', '--comment', '000 source destination ipv6 netmask'],
   },
   'frag_ishasmorefrags' => {
     :params => {
@@ -75,7 +75,7 @@ HASH_TO_ARGS6 = {
       :provider => 'ip6tables',
       :table => "filter",
     },
-    :args => ["-t", :filter, "-p", :tcp, "-m", "frag", "--fragid", "0", "--fragmore", "-m", "comment", "--comment", "100 has more fragments"],
+    :args => ["--wait", "-t", :filter, "-p", :tcp, "-m", "frag", "--fragid", "0", "--fragmore", "-m", "comment", "--comment", "100 has more fragments"],
   },
   'frag_islastfrag' => {
     :params => {
@@ -84,7 +84,7 @@ HASH_TO_ARGS6 = {
       :provider => 'ip6tables',
       :table => "filter",
     },
-    :args => ["-t", :filter, "-p", :tcp, "-m", "frag", "--fragid", "0", "--fraglast", "-m", "comment", "--comment", "100 last fragment"],
+    :args => ["--wait", "-t", :filter, "-p", :tcp, "-m", "frag", "--fragid", "0", "--fraglast", "-m", "comment", "--comment", "100 last fragment"],
   },
   'frag_isfirstfrags' => {
     :params => {
@@ -93,7 +93,7 @@ HASH_TO_ARGS6 = {
       :provider => 'ip6tables',
       :table => "filter",
     },
-    :args => ["-t", :filter, "-p", :tcp, "-m", "frag", "--fragid", "0", "--fragfirst", "-m", "comment", "--comment", "100 first fragment"],
+    :args => ["--wait", "-t", :filter, "-p", :tcp, "-m", "frag", "--fragid", "0", "--fragfirst", "-m", "comment", "--comment", "100 first fragment"],
   },
   'hop_limit' => {
     :params => {
@@ -102,6 +102,6 @@ HASH_TO_ARGS6 = {
       :provider => 'ip6tables',
       :table => "filter",
     },
-    :args => ["-t", :filter, "-p", :tcp, "-m", "comment", "--comment", "100 hop limit", "-m", "hl", "--hl-eq", 255],
+    :args => ["--wait", "-t", :filter, "-p", :tcp, "-m", "comment", "--comment", "100 hop limit", "-m", "hl", "--hl-eq", 255],
   },
 }
