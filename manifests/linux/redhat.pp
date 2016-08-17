@@ -22,15 +22,15 @@ class firewall::linux::redhat (
   # lib/puppet/util/firewall.rb.
   if   ($::operatingsystem != 'Fedora' and versioncmp($::operatingsystemrelease, '7.0') >= 0)
     or ($::operatingsystem == 'Fedora' and versioncmp($::operatingsystemrelease, '15') >= 0) {
-    service { "firewalld":
+    service { 'firewalld':
       ensure => stopped,
       enable => false,
       before => Package['iptables-services']
     }
 
     package { 'iptables-services':
-      ensure  => present,
-      before  => Service['iptables'],
+      ensure => present,
+      before => Service['iptables'],
     }
   }
 
@@ -42,9 +42,9 @@ class firewall::linux::redhat (
   }
 
   file { '/etc/sysconfig/iptables':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0600',
   }
 }
