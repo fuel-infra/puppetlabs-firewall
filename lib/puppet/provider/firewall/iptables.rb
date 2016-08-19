@@ -442,7 +442,8 @@ Puppet::Type.type(:firewall).provide :iptables, :parent => Puppet::Provider::Fir
 
     # Always attempt to wait for a lock for iptables to prevent failures when
     # puppet is running at the same time something else is managing the rules
-    args << ['--wait']
+    iptables_version = Facter.fact('iptables_version').value
+    args << ['--wait'] if (iptables_version && Puppet::Util::Package.versioncmp(iptables_version, '1.4.20') >= 0)
 
     resource_list.each do |res|
       resource_value = nil
